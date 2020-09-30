@@ -1,0 +1,152 @@
+#include<graphics.h>
+#include<stdio.h>
+#include<iostream.h>
+#include<conio.h>
+#include<fstream.h>
+#include<dos.h>
+void main()
+{
+ char str[2];
+ int loop;
+ int a;
+ static int score=0;
+
+ char q1[80]={"Q1 Which of the following has same name as class name?"};
+ char q2[40]={"Q2 C++ uses which approach?"};
+ char q3[80]={"Q3 Which of the following allows code reusability?"};
+ char q4[80]={"Q4 Which of the following shows multiple inheritance?"};
+ 
+ ofstream ob;                        //writing in file
+ ob.open("quiz.txt");
+ ob<<q1<<endl;
+ ob<<"1.Inline Function\t2. Constructor\t3. Structure"<<endl;
+ int p1=ob.tellp();
+
+ ob<<q2<<endl;
+ ob<<"1. Top-down\t2. Bottom-up\t3. Right-left";
+ int p2=ob.tellp(); 
+
+ ob<<q3<<endl;
+ ob<<"1. Inheritance\t2. Abstraction\t3. Polymorphism";
+ int p3=ob.tellp();
+
+ ob<<q4<<endl;
+ ob<<"1. A->B->C\t2. A->B; A->C\t3. A,B->C";
+ int p4=ob.tellp();
+
+ ob.close();
+//******************************************************************//
+
+
+ ofstream copy1;                     //reading from file
+ copy1.open("question.txt");
+ ifstream i;
+
+ i.open("quiz.txt");
+ int j;
+ char ch;
+ for(j=1;j<=p1;j++)
+  {
+    i.seekg(j,ios::beg);
+    ch=i.get();
+    copy1<<ch;
+    cout<<ch;
+  }
+ cout<<"enter your choice:\t";
+ cin>>a;
+ if(a==2)
+  {
+   cout<<"correct!"<<endl;
+   score=score+4;
+   cout<<"Score:"<<score<<endl;
+  }
+ else
+ {
+   cout<<"Incorrect!"<<endl;
+   score=score-1;
+   cout<<"Score:"<<score<<endl;
+ }
+
+cout<<"---------------------------";
+ cout<<endl;
+ for(j=p1;j<=p2;j++)
+  {
+    i.seekg(j,ios::beg);
+    ch= i.get();
+    cout<<ch;
+    copy1<<ch;
+  }
+ int b;
+ cout<<"\nenter your choice:\t";
+ cin>>b;
+
+ if(b==2)
+  {
+    cout<<"Correct!"<<endl;
+    score=score+4;
+    cout<<"Score:"<<score<<endl;
+  }
+ else
+  {
+    cout<<"Incorrect"<<endl;
+    score=score-1;
+    cout<<"Score:"<<score<<endl;
+  }
+ cout<<"---------------------------";
+ cout<<endl;
+ for(j=p2;j<=p3;j++)
+  {
+    i.seekg(j,ios::beg);
+    ch=i.get();
+    cout<<ch;
+    copy1<<ch;
+  }
+ int c;
+ cout<<"\nEnter your choice:\t";
+ cin>>c;
+ if(c==1)
+  {
+    cout<<"Correct!"<<endl;
+    score=score+4;
+    cout<<"Score:"<<score<<endl;
+  }
+ else
+  {
+    cout<<"Incorrect!"<<endl;
+    score=score-1;
+    cout<<"Score:"<<score<<endl;
+  }
+ cout<<"----------------------------";
+ cout<<endl;
+ for(j=p3;j<=p4;j++)
+  {
+    i.seekg(j,ios::beg);
+    ch=i.get();
+    cout<<ch;
+    copy1<<ch;
+  }
+ int d;
+ cout<<"\nEnter your choice:\t";
+ cin>>d;
+ if(d==3)
+  {
+    cout<<"Correct!"<<endl;
+    score=score+4;
+    cout<<"Score:"<<score<<endl;
+  }
+ else
+  {
+    cout<<"Incorrect!"<<endl;
+    score=score-1;
+    cout<<"Score:"<<score<<endl;
+  }
+ cout<<endl;
+ if(score>8)
+    cout<<"Congrats! you passed the test";
+ else
+    cout<<"Oops! you need more practice";
+ 
+ copy1.close();
+ i.close();
+ getch();
+}
